@@ -38,7 +38,7 @@ export const $currencyStore = createStore(initialState)
     .on(fetchCurrencies.doneData, (state, currencies)=>({
         ...state, //копирование чикс
         currencies
-    })) // обновляет первое
+    })) // обновляет первое, но тут последнее
 
     .on(fetchExchangeRate.doneData, (state, exchangeRate)=>({
         ...state,
