@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import CurrencyConverter from './Components/Curency';
+import CurrencyConverter from './Components/Currency/Curency';
 import ExchangeRatesMarquee from './Components/ExchangeRatesMArque';
 import PriceList from './Components/PriceList';
 import ExchangeRateHistory from './Components/HistoricalRates';
