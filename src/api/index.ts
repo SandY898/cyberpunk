@@ -37,3 +37,31 @@ export const getExchangeList = async (): Promise<Array<{ code: string; rate: num
     const { data } = await client.get<ExchangeListResponse>(`/latest/USD`, {});
     return Object.entries(data.conversion_rates).map(([code, rate]) => ({ code, rate }));
 };
+
+//ИСТОРИЯ
+export type HistoricalExchangeRequest = { currencyFrom: string; currencyTo: string };
+export type HistoricalExchangeRate = { date: string; rate: number };
+
+export const getExchangeRatesForLast10Days = async ({
+    currencyFrom,
+    currencyTo,
+  }: HistoricalExchangeRequest): Promise<HistoricalExchangeRate[]> => {
+    const today = new Date();
+    const rates: HistoricalExchangeRate[] = [];
+  
+    for (let i = 0; i < 10; i++) {
+      const date = new Date(today);
+      date.setDate(today.getDate() - i);
+      const formattedDate = date.toISOString().split("T")[0];
+  
+      const response = await axios.get(`https://openexchangerates.org/api/historical/${formattedDate}.json?app_id=${process.env.REACT_APP_API_HISTORY_KEY}`, {
+      });
+  
+      rates.push({
+        date: formattedDate,
+        rate: response.data.rates[currencyTo],
+      });
+    }
+  
+    return rates;
+  };

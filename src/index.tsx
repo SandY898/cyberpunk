@@ -5,7 +5,7 @@ import reportWebVitals from "./reportWebVitals";
 import CurrencyConverter from "./Components/Currency/Curency";
 import ExchangeRatesMarquee from "./Components/ExchangeRatesMarque/ExchangeRatesMArque";
 import PriceList from "./Components/PriceList/PriceList";
-
+import ExchangeRateChart from "./Components/ExchangeHistory/ExchangeHistory";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -14,7 +14,14 @@ root.render(
   <React.StrictMode>
     <ExchangeRatesMarquee />
     <CurrencyConverter />
-    <PriceList />
+    <div className="content-container">
+      <div className="price-list">
+        <PriceList />
+      </div>
+      <div className="exchange-rate-chart">
+        <ExchangeRateChart currencyFrom="USD" currencyTo="EUR" />
+      </div>
+    </div>
   </React.StrictMode>
 );
 

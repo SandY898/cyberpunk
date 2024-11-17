@@ -1,10 +1,10 @@
-import { useStore } from "effector-react";
+import { useUnit } from "effector-react";
 import React, { useState } from "react";
 import { $currencyStore } from "../../store/CurrencyStore";
 import styles from "./PriceList.module.scss";
 
 const PriceList = () => {
-  const { currencyFrom, currencyTo, exchangeRate } = useStore($currencyStore);
+  const { currencyFrom, currencyTo, exchangeRate } = useUnit($currencyStore);
 
   const fixedAmounts = [1, 5, 10, 25, 50, 100, 500, 1000, 5000];
 
