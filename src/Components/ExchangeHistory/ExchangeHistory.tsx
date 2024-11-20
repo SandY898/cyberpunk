@@ -1,5 +1,7 @@
+import { useUnit } from 'effector-react'
 import React, { useEffect, useState } from "react";
 import { getExchangeRatesForLast10Days, HistoricalExchangeRate } from "../../api";
+import { $currencyStore } from '../../store/CurrencyStore'
 import styles from './ExchangeHistory.module.scss'
 import { Line } from "react-chartjs-2";
 import {
@@ -16,10 +18,10 @@ import {
 // Регистрация модулей Chart.js
 ChartJS.register(LineElement, PointElement, LinearScale, Title, CategoryScale, Tooltip, Legend);
 
-const ExchangeRateChart: React.FC<{ currencyFrom: string; currencyTo: string }> = ({
-  currencyFrom,
-  currencyTo,
+const ExchangeRateChart: React.FC = ({
 }) => {
+  const { currencyFrom, currencyTo } = useUnit($currencyStore);
+
   const [rates, setRates] = useState<HistoricalExchangeRate[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -69,7 +71,7 @@ const ExchangeRateChart: React.FC<{ currencyFrom: string; currencyTo: string }> 
     },
   };
 
-  
+
 
   return (
     <>

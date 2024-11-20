@@ -19,7 +19,7 @@ root.render(
         <PriceList />
       </div>
       <div className="exchange-rate-chart">
-        <ExchangeRateChart currencyFrom="USD" currencyTo="EUR" />
+        <ExchangeRateChart />
       </div>
     </div>
   </React.StrictMode>
