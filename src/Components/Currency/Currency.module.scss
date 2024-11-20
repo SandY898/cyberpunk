@@ -1,0 +1,33 @@
+.Primary {
+    margin: 0;
+    padding-top: 0px;
+    user-select: none;
+    text-align: center;
+}
+
+.PrimaryText {
+    color: #00FF66;
+    font-size: 100px;
+    font-family: "Doto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    margin: 0;
+}
+
+.Swap {
+    font-family: "Doto", sans-serif;
+    font-weight: 400;
+    font-size: 24px;
+    color: #00FF66;
+    border-color: #00FF66;
+    margin: 20px;
+    background-color: transparent;
+}
+
+.Results {
+    font-family: "Doto", sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    color: #00FF66;
+}
