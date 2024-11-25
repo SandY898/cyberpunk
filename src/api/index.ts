@@ -29,19 +29,19 @@ export const getExchangeRate = async ({
 }: ExchangeRateRequest): Promise<number> => {
   const { data } = await client.get<ExchangeRateResponse>(
     `/pair/${currencyFrom}/${currencyTo}`,
-    {}
   );
   return data.conversion_rate;
 };
 
 //ВРАЩАЮЩАЯСЯ ФИГНЯ СВЕРХУ
 export type ExchangeListResponse = { conversion_rates: Record<string, number> };
-
-export const getExchangeList = async (): Promise<
-  Array<{ code: string; rate: number }>
-> => {
-  const { data } = await client.get<ExchangeListResponse>(`/latest/USD`, {});
-  return Object.entries(data.conversion_rates).map(([code, rate]) => ({
+export type ExchangeRate = {
+  code: string;
+  rate: number;
+};
+export const getExchangeList = async (): Promise<ExchangeRate[]> => {
+  const { data } = await client.get<ExchangeListResponse>(`/latest/USD`);
+  return Object.entries(data.conversion_rates).map<ExchangeRate>(([code, rate]) => ({
     code,
     rate,
   }));
@@ -67,7 +67,7 @@ export const getExchangeRatesForLast10Days = async ({
     const formattedDate = date.toISOString().split('T')[0];
 
     const response = await historyClient.get(
-      `/historical/${formattedDate}.json`
+      `/historical/${formattedDate}.json`,
     );
 
     rates.push({

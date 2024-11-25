@@ -3,10 +3,10 @@ import { useState } from 'react';
 import { $currencyStore } from '../../store/CurrencyStore';
 import styles from './PriceList.module.scss';
 
+const fixedAmounts = [1, 5, 10, 25, 50, 100, 500, 1000, 5000];
+
 const PriceList = () => {
   const { currencyFrom, currencyTo, exchangeRate } = useUnit($currencyStore);
-
-  const fixedAmounts = [1, 5, 10, 25, 50, 100, 500, 1000, 5000];
 
   const [hidden, setHidden] = useState(true);
 
@@ -25,17 +25,15 @@ const PriceList = () => {
         <button className={styles.HideButton} onClick={() => setHidden(true)}>
           Sh0VV
         </button>
-      )}
-      {hidden && (
-        <div className={styles.Primary}>
-          {fixedAmounts.map((amount) => (
-            <div key={amount}>
-              {amount} {currencyFrom} = {(amount * exchangeRate).toFixed(2)}{' '}
-              {currencyTo}
-            </div>
-          ))}
-        </div>
-      )}
+      )} {hidden && (
+      <div className={styles.Primary}>
+        {fixedAmounts.map((amount) => (
+          <div key={amount}>
+            {amount} {currencyFrom} = {(amount * exchangeRate).toFixed(2)}{' '} {currencyTo}
+          </div>
+        ))}
+      </div>
+    )}
     </>
   );
 };

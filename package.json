@@ -7,11 +7,18 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
+    "lint-fix": "npm run lint -- --fix",
+    "format": "prettier --write src",
     "preview": "vite preview"
+  },
+  "engines": {
+    "node": "22.11.0",
+    "npm": "10.9.0"
   },
   "dependencies": {
     "@farfetched/core": "^0.12.8",
     "axios": "^1.7.7",
+    "chart.js": "^4.4.6",
     "effector": "^23.2.3",
     "effector-react": "^23.2.1",
     "farfetched": "^1.2.0",

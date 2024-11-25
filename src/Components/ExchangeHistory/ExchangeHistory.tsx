@@ -29,7 +29,7 @@ ChartJS.register(
   Title,
   CategoryScale,
   Tooltip,
-  Legend
+  Legend,
 );
 
 const ExchangeRateChart: React.FC = () => {
@@ -47,7 +47,9 @@ const ExchangeRateChart: React.FC = () => {
   if (error) return <div>{error}</div>;
 
   const data = {
-    labels: rates.map((rate) => rate.date),
+    labels:
+
+      rates.map((rate) => rate.date),
     datasets: [
       {
         label: `${currencyFrom} to ${currencyTo}`,
@@ -84,8 +86,7 @@ const ExchangeRateChart: React.FC = () => {
         <button className={styles.HideButton} onClick={() => setHidden(true)}>
           Sh0VV
         </button>
-      )}
-      {hidden && <Line data={data} options={options} />}
+      )} {hidden && <Line data={data} options={options} />}
     </>
   );
 };
