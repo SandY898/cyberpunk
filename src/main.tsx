@@ -18,5 +18,5 @@ createRoot(document.getElementById('root')!).render(
         <ExchangeRateChart />
       </div>
     </div>
-  </StrictMode>
-);
+  </StrictMode>,
+)

@@ -43,11 +43,9 @@ const CurrencyConverter: React.FC = () => {
         }}
         onCurrencyChange={(newCurrency) => setCurrencyFrom(newCurrency)} // Добавлено
       />
-
       <button className={styles.Swap} onClick={() => swapCurrencies()}>
         Polarités ↑†↓ Inversées
       </button>
-
       <CurrencyInput
         value={amountTo}
         currencyFrom={currencyTo}
@@ -58,7 +56,6 @@ const CurrencyConverter: React.FC = () => {
         }}
         onCurrencyChange={(newCurrency) => setCurrencyTo(newCurrency)} // Добавлено
       />
-
       <p className={styles.Results}>
         Result: {amountFrom} {currencyFrom} = {amountTo} {currencyTo}
       </p>
