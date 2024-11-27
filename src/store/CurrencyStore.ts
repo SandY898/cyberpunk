@@ -6,6 +6,21 @@ type Currency = {
   code: string;
   name: string;
 };
+
+type CurrencyStore = {
+  currencies: Currency[];
+  amountFrom: number;
+  amountTo: number;
+  currencyFrom: string;
+  currencyTo: string;
+  exchangeRate: number;
+};
+
+type ExchangeRatePayload = {
+  currencyFrom: string;
+  currencyTo: string;
+};
+
 //region Events
 export const setAmountFrom = createEvent<number>();
 export const setCurrencyFrom = createEvent<string>();
@@ -17,9 +32,14 @@ export const updateExchangeRate = createEvent<number>();
 
 //region Effects
 export const getExchangeRateFx = createEffect({ handler: getExchangeRate });
+export const getCurrenciesFx = createEffect({ handler: getCurrencies });
+const fetchExchangeRateFx = createEffect(
+  ({ currencyFrom, currencyTo }: ExchangeRatePayload) =>
+    getExchangeRate({ currencyFrom, currencyTo })
+);
 //endregion
 
-const initialState = {
+const initialState: CurrencyStore = {
   currencies: [] as Currency[],
   amountFrom: 1,
   amountTo: 0,
@@ -88,9 +108,6 @@ sample({
   clock: AppGate.open,
 });
 
-// фэект для заргузки списка валют
-export const getCurrenciesFx = createEffect({ handler: getCurrencies });
-
 sample({
   clock: AppGate.open,
   target: getCurrenciesFx,
@@ -100,16 +117,6 @@ sample({
   clock: getCurrenciesFx.doneData,
   target: updateCurrencies,
 });
-
-const fetchExchangeRateFx = createEffect(
-  ({
-    currencyFrom,
-    currencyTo,
-  }: {
-    currencyFrom: string;
-    currencyTo: string;
-  }) => getExchangeRate({ currencyFrom, currencyTo })
-);
 
 sample({
   clock: getCurrenciesFx.doneData,
