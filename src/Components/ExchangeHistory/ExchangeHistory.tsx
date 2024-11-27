@@ -8,6 +8,7 @@ import {
   Title,
   CategoryScale,
   Tooltip,
+  Colors,
   Legend,
 } from 'chart.js';
 import { useGate, useUnit } from 'effector-react';
@@ -15,7 +16,6 @@ import { $currencyStore } from '../../store/CurrencyStore';
 import {
   $error,
   $hidden,
-  $loading,
   $rates,
   historicalStoreGate,
   setHidden,
@@ -29,21 +29,16 @@ ChartJS.register(
   Title,
   CategoryScale,
   Tooltip,
+  Colors,
   Legend
 );
 
 const ExchangeRateChart: React.FC = () => {
   const { currencyFrom, currencyTo } = useUnit($currencyStore);
-  const [rates, loading, error, hidden] = useUnit([
-    $rates,
-    $loading,
-    $error,
-    $hidden,
-  ]);
+  const [rates, error, hidden] = useUnit([$rates, $error, $hidden]);
 
   useGate(historicalStoreGate, { currencyFrom, currencyTo });
 
-  if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
   const data = {
@@ -52,7 +47,7 @@ const ExchangeRateChart: React.FC = () => {
       {
         label: `${currencyFrom} to ${currencyTo}`,
         data: rates.map((rate) => rate.rate),
-        borderColor: 'rgba(75, 192, 192, 1)',
+        borderColor: 'rgba(0, 255, 102, 1)',
         backgroundColor: 'rgba(75, 192, 192, 0.2)',
         tension: 0.4,
       },

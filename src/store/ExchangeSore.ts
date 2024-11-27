@@ -1,13 +1,10 @@
-import { createStore, createEffect } from 'effector';
-import { getExchangeList } from '../api';
+import { createStore, createEffect, sample } from 'effector';
+import { ExchangeRate, getExchangeList } from '../api';
+import { AppGate } from './AppGate';
 
-type ExchangeRate = {
-  code: string;
-  rate: number;
-};
-export const fetchExchangeRatesFx = createEffect<void, ExchangeRate[]>(
-  async () => await getExchangeList()
-);
+export const fetchExchangeRatesFx = createEffect<void, ExchangeRate[]>({
+  handler: getExchangeList,
+});
 
 export const $exchangeRates = createStore<ExchangeRate[]>([]).on(
   fetchExchangeRatesFx.doneData,
@@ -16,4 +13,7 @@ export const $exchangeRates = createStore<ExchangeRate[]>([]).on(
   }
 );
 
-fetchExchangeRatesFx();
+sample({
+  clock: AppGate.open,
+  target: fetchExchangeRatesFx,
+});

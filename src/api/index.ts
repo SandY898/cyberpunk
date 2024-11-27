@@ -36,15 +36,19 @@ export const getExchangeRate = async ({
 
 //ВРАЩАЮЩАЯСЯ ФИГНЯ СВЕРХУ
 export type ExchangeListResponse = { conversion_rates: Record<string, number> };
+export type ExchangeRate = {
+  code: string;
+  rate: number;
+};
 
-export const getExchangeList = async (): Promise<
-  Array<{ code: string; rate: number }>
-> => {
-  const { data } = await client.get<ExchangeListResponse>(`/latest/USD`, {});
-  return Object.entries(data.conversion_rates).map(([code, rate]) => ({
-    code,
-    rate,
-  }));
+export const getExchangeList = async (): Promise<ExchangeRate[]> => {
+  const { data } = await client.get<ExchangeListResponse>(`/latest/USD`);
+  return Object.entries(data.conversion_rates).map<ExchangeRate>(
+    ([code, rate]) => ({
+      code,
+      rate,
+    })
+  );
 };
 
 //ИСТОРИЯ

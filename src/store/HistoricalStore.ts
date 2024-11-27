@@ -1,6 +1,12 @@
-import { createStore, createEvent, createEffect, sample } from 'effector';
+import {
+  createStore,
+  createEvent,
+  createEffect,
+  sample,
+  restore,
+} from 'effector';
 import { createGate } from 'effector-react';
-import { getExchangeRatesForLast10Days, HistoricalExchangeRate } from '../api';
+import { getExchangeRatesForLast10Days } from '../api';
 
 // Gate
 export const historicalStoreGate = createGate<{
@@ -29,20 +35,17 @@ export const fetchRatesFx = createEffect(
 );
 
 // Сторы
-export const $rates = createStore<HistoricalExchangeRate[]>([]).on(
-  fetchRatesFx.doneData,
-  (_, rates) => rates
-);
-export const $loading = fetchRatesFx.pending;
+export const $rates = restore(fetchRatesFx.doneData, []);
 export const $error = createStore<string | null>(null)
   .on(fetchRatesFx.failData, () => 'Failed to fetch exchange rates.')
   .reset(fetchRatesFx.done);
 
 export const $hidden = createStore(true).on(setHidden, (_, hidden) => hidden);
 
-// открытие Gate
+// открытие Gate починено афигеть
 sample({
-  clock: historicalStoreGate.open,
+  clock: [historicalStoreGate.open, historicalStoreGate.state.updates],
+  source: historicalStoreGate.state,
   fn: ({ currencyFrom, currencyTo }) => ({ currencyFrom, currencyTo }),
   target: fetchRatesFx,
 });

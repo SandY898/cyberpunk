@@ -1,6 +1,8 @@
+@use 'sass:color';
+
 .Primary {
   user-select: none;
-  color: #0F6;
+  color: #0f6;
   font-size: 24px;
   font-family: Doto, sans-serif;
   font-optical-sizing: auto;
@@ -14,7 +16,7 @@
   font-weight: 900;
   font-size: 20px;
 
-  --hover: #{adjust-hue(#19bc8b, 45deg)};
+  --hover: #{color.adjust(#19bc8b, $hue: 45deg)};
 
   box-shadow:
     0.3em 0.3em 0 0 #19bc8b,
@@ -34,5 +36,25 @@
       inset 6em 3.5em 0 0 var(--hover);
     border-color: var(--hover);
     color: #fff;
+  }
+}
+
+@media (max-width: 768px) {
+  .Primary {
+    font-size: 18px;
+  }
+
+  .HideButton {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 400px) {
+  .Primary {
+    font-size: 15px;
+  }
+
+  .HideButton {
+    font-size: 14px;
   }
 }

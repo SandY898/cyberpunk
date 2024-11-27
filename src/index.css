@@ -49,3 +49,17 @@ code {
   flex: 1; /* Занимает меньше пространства */
   height: 350px;
 }
+
+@media (max-width: 768px) {
+  .content-container {
+    flex-direction: column; /* Элементы располагаются вертикально */
+  }
+
+  .content-container > * {
+    max-width: 100%; /* Элементы занимают всю ширину */
+  }
+
+  .content-container > .exchange-rate-chart {
+    height: auto; /* Подстраиваем высоту */
+  }
+}

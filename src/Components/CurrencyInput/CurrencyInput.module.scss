@@ -13,20 +13,7 @@
   padding: 12px 20px;
   margin: 8px 0;
   box-sizing: border-box;
-  border-color: #0F6;
-  background-color: transparent;
-  color: white;
-}
-
-.InputOff {
-  width: 20%;
-  font-family: Doto, sans-serif;
-  font-weight: 400;
-  font-size: 30px;
-  padding: 12px 20px;
-  margin: 8px 0;
-  box-sizing: border-box;
-  border-color: #005823;
+  border-color: #0f6;
   background-color: transparent;
   color: white;
 }
@@ -46,4 +33,23 @@
 .SelectOption {
   background-color: black;
   font-size: 18px;
+}
+
+@media (max-width: 768px) {
+  .Input {
+    width: 30%;
+    height: 30px;
+    font-size: 20px;
+  }
+  .Select{
+    width: 15%;
+  }
+}
+
+@media (max-width: 400px) {
+  .Input {
+    width: 30%;
+    height: 30px;
+    font-size: 20px;
+  }
 }
