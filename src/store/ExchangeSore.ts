@@ -1,9 +1,9 @@
 import { createStore, createEffect, sample } from 'effector';
-import { ExchangeRate, getExchangeList } from '../api';
+import { ExchangeRate, getExchangeListFx } from '../api';
 import { AppGate } from './AppGate';
 
 export const fetchExchangeRatesFx = createEffect<void, ExchangeRate[]>({
-  handler: getExchangeList,
+  handler: getExchangeListFx,
 });
 
 export const $exchangeRates = createStore<ExchangeRate[]>([]).on(
