@@ -1,7 +1,7 @@
-import CurrencyConverter from "../Currency/Curency";
-import ExchangeRateChart from "../ExchangeHistory/ExchangeHistory";
-import ExchangeRatesMarquee from "../ExchangeRatesMarque/ExchangeRatesMArque";
-import PriceList from "../PriceList/PriceList";
+import CurrencyConverter from './Components/Currency/Curency';
+import ExchangeRateChart from './Components/ExchangeHistory/ExchangeHistory';
+import ExchangeRatesMarquee from './Components/ExchangeRatesMarque/ExchangeRatesMArque';
+import PriceList from "./Components/PriceList/PriceList";
 import styles from "./app.module.scss"
 
 export const App = () => {

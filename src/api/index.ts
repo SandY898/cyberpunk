@@ -1,5 +1,5 @@
-import axios from 'axios';
 import { createQuery } from '@farfetched/core';
+import axios from 'axios';
 import { createEffect } from 'effector';
 
 // клиенты
@@ -44,10 +44,6 @@ export const getCurrencies = createEffect<void, CurrenciesRequest[], Error>(
   }
 );
 
-export const getCurrenciesQuery = createQuery({
-  effect: getCurrencies,
-});
-
 // Получение курса межу двумя
 export const getExchangeRate = createEffect<ExchangeRateRequest, number, Error>(
   async ({ currencyFrom, currencyTo }) => {
@@ -75,10 +71,6 @@ export const getExchangeListFx = createEffect<void, ExchangeRate[], Error>(
   }
 );
 
-export const getExchangeListQuery = createQuery({
-  effect: getExchangeListFx,
-});
-
 // исория
 const getHistoricalRateFx = createEffect<
   { date: string; currencyFrom: string; currencyTo: string },
@@ -90,10 +82,6 @@ const getHistoricalRateFx = createEffect<
     date,
     rate: response.data.rates[currencyTo] / response.data.rates[currencyFrom],
   };
-});
-
-export const getHistoricalRatesQuery = createQuery({
-  effect: getHistoricalRateFx,
 });
 
 // история за 10 дней

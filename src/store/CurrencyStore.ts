@@ -1,6 +1,7 @@
 import { createStore, createEvent, createEffect, sample } from 'effector';
 import { getCurrencies, getExchangeRate } from '../api';
 import { AppGate } from './AppGate';
+import { createQuery } from '@farfetched/core';
 
 type Currency = {
   code: string;
@@ -26,8 +27,8 @@ export const updateExchangeRate = createEvent<number>();
 //endregion
 
 //region Effects
-export const getExchangeRateFx = createEffect({ handler: getExchangeRate });
-export const getCurrenciesFx = createEffect({ handler: getCurrencies });
+export const ExchangeRateQuery = createQuery({ handler: getExchangeRate });
+export const CurrencyQuery = createQuery({ handler: getCurrencies });
 const fetchExchangeRateFx = createEffect(
   ({
     currencyFrom,
@@ -86,7 +87,7 @@ sample({
     currencyFrom,
     currencyTo,
   }),
-  target: getExchangeRateFx,
+  target: ExchangeRateQuery.start,
 });
 
 sample({
@@ -96,32 +97,30 @@ sample({
     currencyTo,
     currencyFrom,
   }),
-  target: getExchangeRateFx,
+  target: ExchangeRateQuery.start,
 });
 
 sample({
-  clock: getExchangeRateFx.doneData,
+  clock: ExchangeRateQuery.finished.success,
+  fn: (s) => s.result,
   target: updateExchangeRate,
-});
-
-sample({
-  clock: AppGate.open,
 });
 
 // фэект для заргузки списка валют
 
 sample({
   clock: AppGate.open,
-  target: getCurrenciesFx,
+  target: CurrencyQuery.start,
 });
 
 sample({
-  clock: getCurrenciesFx.doneData,
+  clock: CurrencyQuery.finished.success,
+  fn: (s) => s.result,
   target: updateCurrencies,
 });
 
 sample({
-  clock: getCurrenciesFx.doneData,
+  clock: CurrencyQuery.finished.success,
   source: $currencyStore,
   fn: (state) => ({
     currencyFrom: state.currencyFrom,
