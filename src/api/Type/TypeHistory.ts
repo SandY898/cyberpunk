@@ -1,10 +1,11 @@
 export type HistoricalExchangeRequest = {
+  date?: string;
   currencyFrom: string;
   currencyTo: string;
 };
 
 export type HistoricalExchangeRate = {
-  date: string;
+  date?: string;
   rate: number;
 };
 

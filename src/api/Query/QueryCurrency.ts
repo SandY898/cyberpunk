@@ -1,10 +1,10 @@
 import { createEffect } from "effector";
-import { client } from "../Client/ClientCurrency";
-import { CurrenciesRequest, CurrenciesResponse, ExchangeRateRequest, ExchangeRateResponse, ExchangeRate, ExchangeListResponse } from "../Type/TypeCurrency";
+import { exchangeClient, getLatestExchange } from '../Client/ClientCurrency';
+import { CurrenciesRequest, CurrenciesResponse, ExchangeRateRequest, ExchangeRateResponse, ExchangeRate } from "../Type/TypeCurrency";
 
 // Получение списка валют
 export const getCurrencies = async (): Promise<CurrenciesRequest[]> => {
-  const response = await client.get<CurrenciesResponse>('/codes');
+  const response = await exchangeClient.get<CurrenciesResponse>('/codes');
   return response.data.supported_codes.map(([code, name]) => ({
     code,
     name,
@@ -16,7 +16,7 @@ export const getExchangeRate = async ({
   currencyFrom,
   currencyTo,
 }: ExchangeRateRequest): Promise<number> => {
-  const response = await client.get<ExchangeRateResponse>(
+  const response = await exchangeClient.get<ExchangeRateResponse>(
     `/pair/${currencyFrom}/${currencyTo}`
   );
   return response.data.conversion_rate;
@@ -25,7 +25,7 @@ export const getExchangeRate = async ({
 // вращающаяся фигнгя
 export const getExchangeListFx = createEffect<void, ExchangeRate[], Error>(
   async () => {
-    const response = await client.get<ExchangeListResponse>('/latest/USD');
+    const response = await getLatestExchange('USD');
     return Object.entries(response.data.conversion_rates).map(
       ([code, rate]) => ({
         code,
