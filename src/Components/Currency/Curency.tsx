@@ -1,15 +1,11 @@
 import React, { useEffect } from 'react';
 import { CurrencyInput } from '../CurrencyInput/CurrencyInput';
 import styles from './Currency.module.scss';
-import {
-  $currencyStore,
-  setAmountFrom,
-  setCurrencyFrom,
-  setCurrencyTo,
-  swapCurrencies,
-} from '../../store/CurrencyStore';
+
 import { useUnit } from 'effector-react';
-import { getExchangeRate } from '../../api';
+import { getExchangeRate } from '../../api/Query/QueryCurrency';
+import { $currencyStore, setAmountFrom, setCurrencyFrom, swapCurrencies, setCurrencyTo } from '../../store/featureCurrency';
+
 
 const CurrencyConverter: React.FC = () => {
   const {

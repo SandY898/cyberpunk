@@ -1,21 +1,9 @@
 import { createStore, createEvent, createEffect, sample } from 'effector';
-import { getCurrencies, getExchangeRate } from '../api';
-import { AppGate } from './AppGate';
+
+import { AppGate } from '../AppGate';
 import { createQuery } from '@farfetched/core';
-
-type Currency = {
-  code: string;
-  name: string;
-};
-
-type CurrencyStore = {
-  currencies: Currency[];
-  amountFrom: number;
-  amountTo: number;
-  currencyFrom: string;
-  currencyTo: string;
-  exchangeRate: number;
-};
+import { getExchangeRate, getCurrencies } from '../../api/Query/QueryCurrency';
+import { Currency, CurrencyStore } from './lib';
 
 //region Events
 export const setAmountFrom = createEvent<number>();
@@ -29,6 +17,7 @@ export const updateExchangeRate = createEvent<number>();
 //region Effects
 export const ExchangeRateQuery = createQuery({ handler: getExchangeRate });
 export const CurrencyQuery = createQuery({ handler: getCurrencies });
+
 const fetchExchangeRateFx = createEffect(
   ({
     currencyFrom,
@@ -41,7 +30,7 @@ const fetchExchangeRateFx = createEffect(
 //endregion
 
 const initialState: CurrencyStore = {
-  currencies: [] as Currency[],
+  currencies: [],
   amountFrom: 1,
   amountTo: 0,
   currencyFrom: 'USD',

@@ -1,12 +1,13 @@
 import { useUnit } from 'effector-react';
 import { useState } from 'react';
-import { $currencyStore } from '../../store/CurrencyStore';
 import styles from './PriceList.module.scss';
+import { $currencyStore } from '../../store/featureCurrency';
+
+  const fixedAmounts = [1, 5, 10, 25, 50, 100, 500, 1000, 5000];
 
 const PriceList = () => {
   const { currencyFrom, currencyTo, exchangeRate } = useUnit($currencyStore);
 
-  const fixedAmounts = [1, 5, 10, 25, 50, 100, 500, 1000, 5000];
 
   const [hidden, setHidden] = useState(true);
 

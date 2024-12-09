@@ -1,15 +1,17 @@
 import { createEffect, sample } from 'effector';
-import { ExchangeRate, getExchangeListFx, getExchangeRateQuery } from '../../api';
+
 import { AppGate } from '../AppGate';
 import { createQuery } from '@farfetched/core';
-import {
-  $currencyStore,
-  setCurrencyTo,
-  updateExchangeRate,
-} from '../CurrencyStore';
+
+import { ExchangeRate } from '../../api/Type/TypeCurrency';
+import { getExchangeListFx, getExchangeRate } from '../../api/Query/QueryCurrency';
+import { setCurrencyTo, $currencyStore, updateExchangeRate } from '../featureCurrency';
 
 export const fetchExchangeRates = createEffect<void, ExchangeRate[]>({
   handler: getExchangeListFx,
+});
+const getExchangeRateQuery = createQuery({
+  handler: getExchangeRate,
 });
 const exchangeRatesQuery = createQuery({ effect: fetchExchangeRates });
 export const $exchangeRates = exchangeRatesQuery.$data.map(
