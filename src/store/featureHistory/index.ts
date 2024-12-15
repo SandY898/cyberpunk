@@ -1,2 +1,8 @@
-export * from "./lib"
-export * from "./model"
+export {
+  historicalStoreGate,
+  setHidden,
+  fetchRatesFx,
+  $rates,
+  $error,
+  $hidden,
+} from './model';

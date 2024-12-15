@@ -1,2 +1,1 @@
-export * from "./lib"
-export * from "./model"
+export { fetchExchangeRates, $exchangeRates, $pending, $error } from './model';

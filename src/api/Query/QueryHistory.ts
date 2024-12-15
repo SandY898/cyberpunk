@@ -1,5 +1,9 @@
-import { historyClient } from "../Client/ClientHisotry";
-import { HistoricalExchangeRate, HistoricalExchangeRateResponse, HistoricalExchangeRequest } from "../Type/TypeHistory";
+import { historyClient } from '../Client/ClientHisotry';
+import {
+  HistoricalExchangeRate,
+  HistoricalExchangeRateResponse,
+  HistoricalExchangeRequest,
+} from '../Type/TypeHistory';
 
 // исория
 export const getHistoricalRateFx = async ({
