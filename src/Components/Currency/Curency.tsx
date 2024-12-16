@@ -4,13 +4,8 @@ import styles from './Currency.module.scss';
 
 import { useUnit } from 'effector-react';
 import { getExchangeRate } from '../../api/Query/QueryCurrency';
-import {
-  $currencyStore,
-  setAmountFrom,
-  setCurrencyFrom,
-  swapCurrencies,
-  setCurrencyTo,
-} from '../../store/featureCurrency';
+import { $currencyStore, setAmountFrom, setCurrencyFrom, swapCurrencies, setCurrencyTo } from '@/store/featureCurrency/model';
+
 
 const CurrencyConverter: React.FC = () => {
   const {

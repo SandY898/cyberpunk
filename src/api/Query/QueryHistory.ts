@@ -9,11 +9,7 @@ export const getHistoricalRateFx = async ({
   currencyFrom,
   currencyTo,
 }: HistoricalExchangeRequest): Promise<HistoricalExchangeRate> => {
-  if (!currencyFrom || !currencyTo || !date) {
-    throw new Error('currencyFrom, currencyTo, and date are required');
-  }
-
-  const response = await getHistoricalRate(currencyFrom, currencyTo, date);
+  const response = await getHistoricalRate(currencyFrom, currencyTo, date || '');
   return {
     date,
     rate: response.data.rates[currencyTo] / response.data.rates[currencyFrom],

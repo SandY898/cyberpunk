@@ -2,11 +2,9 @@ import { useGate, useUnit } from 'effector-react';
 import Marquee from 'react-fast-marquee';
 import styles from './ExchangeRatesMarquee.module.scss';
 import { AppGate } from '../../store/AppGate';
-import {
-  $error,
-  $exchangeRates,
-  $pending,
-} from '../../store/featureExchange/index';
+import { $exchangeRates, $pending } from '@/store/featureExchange/model';
+import { $error } from '@/store/featureHistory/model';
+
 
 const ExchangeRatesMarquee: React.FC = () => {
   useGate(AppGate);

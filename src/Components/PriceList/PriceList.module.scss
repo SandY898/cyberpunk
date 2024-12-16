@@ -1,4 +1,5 @@
 @use 'sass:color';
+@use '/src/styles/mixins';
 
 .Primary {
   user-select: none;
@@ -9,6 +10,14 @@
   font-weight: 400;
   font-style: normal;
   margin-left: 30px;
+
+  @include mixins.largemedia {
+    font-size: 18px;
+  }
+
+  @include mixins.smallmedia {
+    font-size: 15px;
+  }
 }
 
 .HideButton {
@@ -37,24 +46,12 @@
     border-color: var(--hover);
     color: #fff;
   }
-}
 
-@media (max-width: 768px) {
-  .Primary {
-    font-size: 18px;
-  }
-
-  .HideButton {
-    font-size: 15px;
-  }
-}
-
-@media (max-width: 400px) {
-  .Primary {
+  @include mixins.largemedia {
     font-size: 15px;
   }
 
-  .HideButton {
+  @include mixins.smallmedia {
     font-size: 14px;
   }
 }

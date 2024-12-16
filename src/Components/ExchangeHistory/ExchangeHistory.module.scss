@@ -1,4 +1,5 @@
 @use 'sass:color';
+@use '/src/styles/mixins';
 
 .HideButton {
   float: right;
@@ -29,11 +30,11 @@
     color: #fff;
   }
 
-  @media (max-width: 768px) {
+  @include mixins.largemedia {
     font-size: 15px;
   }
 
-  @media (max-width: 400px) {
+  @include mixins.smallmedia {
     font-size: 14px;
   }
 }

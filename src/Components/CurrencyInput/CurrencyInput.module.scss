@@ -1,3 +1,5 @@
+@use '/src/styles/mixins';
+
 .InputContainer {
   display: flex;
   align-items: center;
@@ -17,13 +19,13 @@
   background-color: transparent;
   color: white;
 
-  @media (max-width: 768px) {
+  @include mixins.largemedia {
     width: 30%;
     height: 30px;
     font-size: 20px;
   }
 
-  @media (max-width: 400px) {
+    @include mixins.smallmedia {
     width: 30%;
     height: 30px;
     font-size: 20px;
@@ -41,7 +43,7 @@
   background-color: transparent;
   color: white;
 
-  @media (max-width: 768px) {
+  @include mixins.largemedia {
     width: 15%;
   }
 }

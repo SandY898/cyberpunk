@@ -8,11 +8,8 @@ import {
   getExchangeListFx,
   getExchangeRate,
 } from '../../api/Query/QueryCurrency';
-import {
-  setCurrencyTo,
-  $currencyStore,
-  updateExchangeRate,
-} from '../featureCurrency';
+import { setCurrencyTo, $currencyStore, updateExchangeRate } from '../featureCurrency/model';
+
 
 export const fetchExchangeRates = createEffect<void, ExchangeRate[]>({
   handler: getExchangeListFx,

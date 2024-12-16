@@ -1,3 +1,5 @@
+@use '/src/styles/mixins';
+
 .Primary {
   margin: 0;
   padding-top: 0;
@@ -14,11 +16,11 @@
   font-style: normal;
   margin: 0;
 
-  @media (max-width: 768px) {
+  @include mixins.largemedia {
     font-size: 48px;
   }
 
-  @media (max-width: 400px) {
+  @include mixins.smallmedia {
     font-size: 40px;
   }
 }
@@ -32,11 +34,11 @@
   margin: 20px;
   background-color: transparent;
 
-  @media (max-width: 768px) {
+  @include mixins.largemedia {
     font-size: 18px;
   }
 
-  @media (max-width: 400px) {
+  @include mixins.smallmedia {
     font-size: 18px;
   }
 }
@@ -47,11 +49,11 @@
   font-size: 24px;
   color: var(--color-green);
 
-  @media (max-width: 768px) {
+  @include mixins.largemedia {
     font-size: 18px;
   }
 
-  @media (max-width: 400px) {
+  @include mixins.smallmedia {
     font-size: 18px;
   }
 }

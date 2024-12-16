@@ -12,15 +12,15 @@ import {
   Legend,
 } from 'chart.js';
 import { useGate, useUnit } from 'effector-react';
+import { $currencyStore } from '@/store/featureCurrency/model';
 
 import {
-  $error,
-  $hidden,
   $rates,
+  $hidden,
   historicalStoreGate,
   setHidden,
-} from '../../store/featureHistory';
-import { $currencyStore } from '../../store/featureCurrency';
+  $error,
+} from '@/store/featureHistory/model';
 
 ChartJS.register(
   LineElement,
