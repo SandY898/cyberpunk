@@ -10,7 +10,6 @@ const PriceList = () => {
 
   const [hidden, setHidden] = useState(true);
 
-  // Проверяем наличие exchangeRate
   if (!exchangeRate) {
     return <div className={styles.Primary}>Loading exchange rate...</div>;
   }

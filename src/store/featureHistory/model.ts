@@ -13,13 +13,11 @@ import {
 } from '../../api/Type/TypeHistory';
 import { getHistoricalRateFx } from '../../api/Query/QueryHistory';
 
-// Gate
 export const historicalStoreGate = createGate<{
   currencyFrom: string;
   currencyTo: string;
 }>();
 
-// События
 export const setHidden = createEvent<boolean>();
 
 const getExchangeRatesForLast10Days = async ({
@@ -42,7 +40,6 @@ const getExchangeRatesForLast10Days = async ({
   return results;
 };
 
-// Эффекты
 export const fetchRatesFx = createEffect(
   async ({
     currencyFrom,
@@ -59,7 +56,6 @@ export const fetchRatesFx = createEffect(
   }
 );
 
-// Сторы
 export const $rates = restore(fetchRatesFx.doneData, []);
 export const $error = createStore<string | null>(null)
   .on(fetchRatesFx.failData, () => 'Failed to fetch exchange rates.')
@@ -67,7 +63,6 @@ export const $error = createStore<string | null>(null)
 
 export const $hidden = createStore(true).on(setHidden, (_, hidden) => hidden);
 
-// открытие Gate починено афигеть
 sample({
   clock: [historicalStoreGate.open, historicalStoreGate.state.updates],
   source: historicalStoreGate.state,

@@ -1,5 +1,5 @@
 export type HistoricalExchangeRequest = {
-  date?:string;
+  date?: string;
   currencyFrom: string;
   currencyTo: string;
 };
@@ -9,7 +9,6 @@ export type HistoricalExchangeRate = {
   rate: number;
 };
 
-// Тип ответа от API
 export type HistoricalExchangeRateResponse = {
-  rates: Record<string, number>; // Объект с валютами и их значениями
+  rates: Record<string, number>;
 };

@@ -4,8 +4,13 @@ import styles from './Currency.module.scss';
 
 import { useUnit } from 'effector-react';
 import { getExchangeRate } from '../../api/Query/QueryCurrency';
-import { $currencyStore, setAmountFrom, setCurrencyFrom, swapCurrencies, setCurrencyTo } from '../../store/featureCurrency';
-
+import {
+  $currencyStore,
+  setAmountFrom,
+  setCurrencyFrom,
+  swapCurrencies,
+  setCurrencyTo,
+} from '../../store/featureCurrency';
 
 const CurrencyConverter: React.FC = () => {
   const {
@@ -15,7 +20,7 @@ const CurrencyConverter: React.FC = () => {
     currencyFrom,
     currencyTo,
     exchangeRate,
-  } = useUnit($currencyStore); // получаем весь букет
+  } = useUnit($currencyStore);
 
   useEffect(() => {
     getExchangeRate({ currencyFrom, currencyTo });
@@ -37,7 +42,7 @@ const CurrencyConverter: React.FC = () => {
           onChange: handleAmountFromChange,
           placeholder: 'Enter sum',
         }}
-        onCurrencyChange={(newCurrency) => setCurrencyFrom(newCurrency)} // Добавлено
+        onCurrencyChange={(newCurrency) => setCurrencyFrom(newCurrency)}
       />
 
       <button className={styles.Swap} onClick={() => swapCurrencies()}>
@@ -52,7 +57,7 @@ const CurrencyConverter: React.FC = () => {
           placeholder: 'Result',
           disabled: true,
         }}
-        onCurrencyChange={(newCurrency) => setCurrencyTo(newCurrency)} // Добавлено
+        onCurrencyChange={(newCurrency) => setCurrencyTo(newCurrency)}
       />
 
       <p className={styles.Results}>

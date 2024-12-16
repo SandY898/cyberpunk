@@ -1,19 +1,19 @@
-import { historyClient } from '../Client/ClientHisotry';
+import { getHistoricalRate } from '../Client/ClientHisotry';
 import {
   HistoricalExchangeRate,
-  HistoricalExchangeRateResponse,
   HistoricalExchangeRequest,
 } from '../Type/TypeHistory';
 
-// исория
 export const getHistoricalRateFx = async ({
   date,
   currencyFrom,
   currencyTo,
 }: HistoricalExchangeRequest): Promise<HistoricalExchangeRate> => {
-  const response = await historyClient.get<HistoricalExchangeRateResponse>(
-    `/historical/${date}.json`
-  );
+  if (!currencyFrom || !currencyTo || !date) {
+    throw new Error('currencyFrom, currencyTo, and date are required');
+  }
+
+  const response = await getHistoricalRate(currencyFrom, currencyTo, date);
   return {
     date,
     rate: response.data.rates[currencyTo] / response.data.rates[currencyFrom],

@@ -12,7 +12,7 @@ export const CurrencyInput: FC<{
   currencyFrom: string;
   currencies: Currency[];
   inputProps: ComponentProps<'input'>;
-  onCurrencyChange: (currency: string) => void; // Новый пропс
+  onCurrencyChange: (currency: string) => void;
 }> = ({ value, inputProps, currencyFrom, currencies, onCurrencyChange }) => (
   <div className={styles.InputContainer}>
     <input
@@ -23,7 +23,7 @@ export const CurrencyInput: FC<{
     />
     <select
       value={currencyFrom}
-      onChange={(e) => onCurrencyChange(e.target.value)} // Вызываем функцию из пропсов
+      onChange={(e) => onCurrencyChange(e.target.value)}
       className={styles.Select}
     >
       {currencies.map((currency) => (

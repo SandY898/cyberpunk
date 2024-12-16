@@ -5,16 +5,13 @@ import { createQuery } from '@farfetched/core';
 import { getExchangeRate, getCurrencies } from '../../api/Query/QueryCurrency';
 import { Currency, CurrencyStore } from './lib';
 
-//region Events
 export const setAmountFrom = createEvent<number>();
 export const setCurrencyFrom = createEvent<string>();
 export const setCurrencyTo = createEvent<string>();
 export const swapCurrencies = createEvent();
 export const updateCurrencies = createEvent<Currency[]>();
 export const updateExchangeRate = createEvent<number>();
-//endregion
 
-//region Effects
 export const ExchangeRateQuery = createQuery({ handler: getExchangeRate });
 export const CurrencyQuery = createQuery({ handler: getCurrencies });
 
@@ -27,7 +24,6 @@ const fetchExchangeRateFx = createEffect(
     currencyTo: string;
   }) => getExchangeRate({ currencyFrom, currencyTo })
 );
-//endregion
 
 const initialState: CurrencyStore = {
   currencies: [],
@@ -95,8 +91,6 @@ sample({
   target: updateExchangeRate,
 });
 
-// фэект для заргузки списка валют
-
 sample({
   clock: AppGate.open,
   target: CurrencyQuery.start,
@@ -127,8 +121,8 @@ sample({
   clock: swapCurrencies,
   source: $currencyStore,
   fn: ({ currencyFrom, currencyTo }) => ({
-    currencyFrom, // Новый From после swap
-    currencyTo, // Новый To после swap
+    currencyFrom,
+    currencyTo,
   }),
   target: fetchExchangeRateFx,
 });
