@@ -3,7 +3,7 @@ import { CurrencyInput } from '../CurrencyInput/CurrencyInput';
 import styles from './Currency.module.scss';
 
 import { useUnit } from 'effector-react';
-import { getExchangeRate } from '@/api/Query/QueryCurrency';
+
 import {
   $currencyStore,
   setAmountFrom,
@@ -11,6 +11,7 @@ import {
   swapCurrencies,
   setCurrencyTo,
 } from '@/store/featureCurrency/model';
+import { getExchangeRate } from '@/store/featureExchange/query';
 
 const CurrencyConverter: React.FC = () => {
   const {

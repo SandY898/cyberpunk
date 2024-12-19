@@ -11,7 +11,7 @@ import {
   HistoricalExchangeRate,
   HistoricalExchangeRequest,
 } from '../../api/Type/TypeHistory';
-import { getHistoricalRateFx } from '../../api/Query/QueryHistory';
+import { getHistoricalRateFx } from './query';
 
 export const historicalStoreGate = createGate<{
   currencyFrom: string;
@@ -21,13 +21,13 @@ export const historicalStoreGate = createGate<{
 export const setHidden = createEvent<boolean>();
 
 const getExchangeRatesForLast10Days = async ({
+  date: today,
   currencyFrom,
   currencyTo,
 }: HistoricalExchangeRequest): Promise<HistoricalExchangeRate[]> => {
-  const today = new Date();
   const dates = Array.from({ length: 10 }, (_, i) => {
     const date = new Date(today);
-    date.setDate(today.getDate() - i);
+    date.setDate(date.getDate() - i);
     return date.toISOString().split('T')[0];
   });
 
@@ -48,10 +48,14 @@ export const fetchRatesFx = createEffect(
     currencyFrom: string;
     currencyTo: string;
   }) => {
+    const today = new Date().toISOString().split('T')[0];
+
     const data = await getExchangeRatesForLast10Days({
+      date: today,
       currencyFrom,
       currencyTo,
     });
+
     return data.reverse();
   }
 );

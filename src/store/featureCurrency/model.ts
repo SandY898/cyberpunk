@@ -2,8 +2,10 @@ import { createStore, createEvent, createEffect, sample } from 'effector';
 
 import { AppGate } from '../AppGate';
 import { createQuery } from '@farfetched/core';
-import { getExchangeRate, getCurrencies } from '../../api/Query/QueryCurrency';
+
 import { Currency, CurrencyStore } from './lib';
+import { getCurrencies } from './query';
+import { getExchangeRate } from '../featureExchange/query';
 
 export const setAmountFrom = createEvent<number>();
 export const setCurrencyFrom = createEvent<string>();

@@ -1,11 +1,10 @@
 import axios from 'axios';
-
-import { ExchangeRateAPICurrency } from './currencies';
 import {
   CurrenciesResponse,
   ExchangeListResponse,
   ExchangeRateResponse,
-} from '../Type/TypeCurrency';
+} from '@/api/Type/TypeCurrency';
+import { ExchangeRateAPICurrency } from './currencies';
 
 export const exchangeClient = axios.create({
   baseURL: `https://v6.exchangerate-api.com/v6/${import.meta.env.VITE_EXCHANGERATE_API_KEY}`,
